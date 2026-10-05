@@ -1,0 +1,78 @@
+# VWML course-machine fingerprint — captured 2026-10-04 10:26:46 immediately before clean-room uninstall
+# Purpose: metadata-only diff target for the replication (guide note 15). No research data kept.
+
+== ComfyUI repo ==
+3c80da7f87ee359b2d06f107cb3c0797079dfbbb
+3c80da7 Fix ace step VAE decode crashing on non bf16 GPUs. (#16405) (2026-09-18 14:35:35 -0400)
+
+== venv ==
+Python 3.12.14
+torch 2.14.0+cu130 | cuda 13.0 | available True
+
+== weights inventory (models/<path> bytes) ==
+background_removal/birefnet.safetensors 444473596
+checkpoints/hunyuan_3d_v2.1.safetensors 7365943290
+clip_vision/dino_v3_L_naf_fp32.safetensors 1215214176
+clip_vision/dino_v3_vit_l.safetensors 1212559776
+diffusion_models/pixal3d_int8_convrot.safetensors 5584555824
+diffusion_models/trellis_2_int8_convrot.safetensors 5253048192
+geometry_estimation/moge_2_vitl_normal_fp16.safetensors 661859924
+vae/trellis_2_shape_vae_bf16.safetensors 1095844024
+vae/trellis_2_texture_vae_bf16.safetensors 948461364
+
+== input photos (lost with uninstall) ==
+example.png 8589
+housetest_nolawn.png 215070
+housetest.png 221167
+nyc_cornice.png 88408
+nyc_door.png 37050
+nyc_fireesc.png 220923
+nyc_full_src.png 1022898
+nyc_storefront.png 235245
+nyc_store_left.png 125173
+nyc_store_right.png 63499
+nyc_win_ac.png 29643
+nyc_win_crown.png 27053
+nyc_win.png 23247
+part_door.png 44397
+part_window.png 34956
+test_mug.jpg 41318
+trellis_test_object.png 1616502
+
+== output GLBs (lost with uninstall) ==
+house_hy3d_tex.glb 82037664
+house_hy3d_tex.glb.png 6315998
+house_p3d_fix_tex.glb 52737616
+house_t2fix512_tex.glb 48803828
+nyc_fireesc_00001_.glb 57746584
+nyc_full_00001_.glb 63624668
+nyc_storefront_00001_.glb 61455344
+part_door_00001_.glb 32845376
+part_door_clean.glb 24151008
+part_door_tex.glb 30930772
+part_window_00001_.glb 36903080
+part_window_clean.glb 5440428
+part_window_tex.glb 36449708
+VWML_trellis2_shape_only_00001_.glb 164133644
+
+== tools/ scripts (lost with uninstall) ==
+assemble_house.py
+blender_mcp_headless.py
+blender_test_render.py
+extract_glb_tex.py
+fix_glb_tex.py
+glbl_preview.py
+nyc_crop2.py
+nyc_crop.py
+part_clean.py
+part_crop2.py
+part_crop.py
+part_measure.py
+part_preview.py
+part_submit.py
+pixal3d_prompt.json
+trellis_prompt_hires.json
+trellis_prompt.json
+
+== disk ==
+30G	/home/thomasg/comfyui

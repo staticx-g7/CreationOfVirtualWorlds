@@ -1,0 +1,13 @@
+{
+  "autoHide": false,
+  "showTags": false,
+  "showAttachments": true,
+  "showOrphans": true,
+  "colorGroups": [
+    { "id": "comfy", "query": "tag:#comfyui", "innerColor": 3658301, "outerColor": 3658301 },
+    { "id": "unreal", "query": "tag:#unreal", "innerColor": 5621334, "outerColor": 5621334 },
+    { "id": "mcp", "query": "tag:#mcp", "innerColor": 12293906, "outerColor": 12293906 },
+    { "id": "data", "query": "tag:#data", "innerColor": 16763904, "outerColor": 16763904 },
+    { "id": "moc", "query": "tag:#moc", "innerColor": 16753787, "outerColor": 16753787 }
+  ]
+}

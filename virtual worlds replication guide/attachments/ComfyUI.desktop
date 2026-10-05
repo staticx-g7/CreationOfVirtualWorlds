@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=ComfyUI (VWML course)
+Comment=ComfyUI server + browser (TRELLIS.2 native, models in ~/comfyui/ComfyUI/models)
+Exec=bash -c "cd ~/comfyui/ComfyUI && setsid nohup ~/comfyui/.venv/bin/python main.py --listen 127.0.0.1 --port 8188 --lowvram --disable-smart-memory --reserve-vram 2 --auto-launch >/tmp/comfyui.log 2>&1 & sleep 6; xdg-open http://127.0.0.1:8188"
+Icon=preferences-desktop-display
+Terminal=false
+Type=Application
+Categories=Graphics;

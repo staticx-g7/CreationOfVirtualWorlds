@@ -1,0 +1,892 @@
+{
+ "last_node_id": 28,
+ "last_link_id": 24,
+ "nodes": [
+  {
+   "id": 0,
+   "type": "Note",
+   "pos": [
+    -40,
+    -260
+   ],
+   "size": [
+    440,
+    190
+   ],
+   "flags": {},
+   "inputs": [],
+   "outputs": [],
+   "properties": {},
+   "color": "#222",
+   "bgcolor": "#000",
+   "widgets_values": [
+    "12 GB-safe TRELLIS.2 shape-only.\nNothing to configure: Trellis2 branch hard-wired, no upsample stage (=1024 decode), no texture bake (the 12 GB wall).\nPick your image in Load Image -> Queue -> output/3d/*.glb"
+   ]
+  },
+  {
+   "id": 1,
+   "type": "LoadImage",
+   "pos": [
+    0,
+    0
+   ],
+   "size": [
+    300,
+    320
+   ],
+   "flags": {},
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1,
+      4
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "sdxl_simple_00004_.png",
+    "image"
+   ]
+  },
+  {
+   "id": 2,
+   "type": "LoadBackgroundRemovalModel",
+   "pos": [
+    0,
+    380
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "bg_model",
+     "type": "BACKGROUND_REMOVAL",
+     "links": [
+      2
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "LoadBackgroundRemovalModel"
+   },
+   "widgets_values": [
+    "birefnet.safetensors"
+   ]
+  },
+  {
+   "id": 4,
+   "type": "CLIPVisionLoader",
+   "pos": [
+    0,
+    520
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "clip_vision",
+     "type": "CLIP_VISION",
+     "links": [
+      5
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPVisionLoader"
+   },
+   "widgets_values": [
+    "dino_v3_L_naf_fp32.safetensors"
+   ]
+  },
+  {
+   "id": 3,
+   "type": "RemoveBackground",
+   "pos": [
+    400,
+    380
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "bg_removal_model",
+     "type": "BACKGROUND_REMOVAL",
+     "link": 2
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mask",
+     "type": "MASK",
+     "links": [
+      3
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "RemoveBackground"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 28,
+   "type": "ImageCropToMask",
+   "pos": [
+    780,
+    60
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 4
+    },
+    {
+     "name": "masks",
+     "type": "MASK",
+     "link": 3
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": [
+      6
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "ImageCropToMask"
+   },
+   "widgets_values": [
+    1024,
+    1024,
+    1.0,
+    0,
+    "#000000"
+   ]
+  },
+  {
+   "id": 5,
+   "type": "Trellis2Conditioning",
+   "pos": [
+    780,
+    340
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "clip_vision_model",
+     "type": "CLIP_VISION",
+     "link": 5
+    },
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 6
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      7,
+      13
+     ]
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      8,
+      14
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Trellis2Conditioning"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 7,
+   "type": "EmptyTrellis2LatentStructure",
+   "pos": [
+    1160,
+    60
+   ],
+   "size": [
+    243,
+    80
+   ],
+   "flags": {},
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      10
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "EmptyTrellis2LatentStructure"
+   },
+   "widgets_values": [
+    1
+   ]
+  },
+  {
+   "id": 6,
+   "type": "UNETLoader",
+   "pos": [
+    1160,
+    220
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      9,
+      19
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "UNETLoader"
+   },
+   "widgets_values": [
+    "trellis_2_int8_convrot.safetensors",
+    "default"
+   ]
+  },
+  {
+   "id": 8,
+   "type": "KSampler",
+   "pos": [
+    1520,
+    60
+   ],
+   "size": [
+    270,
+    270
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 9
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 7
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 8
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 10
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      11
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSampler"
+   },
+   "title": "KSampler structure (12)",
+   "widgets_values": [
+    42,
+    "fixed",
+    12,
+    7.5,
+    "euler",
+    "normal",
+    1.0
+   ]
+  },
+  {
+   "id": 10,
+   "type": "VAELoader",
+   "pos": [
+    1520,
+    600
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      12,
+      21
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "trellis_2_shape_vae_bf16.safetensors"
+   ]
+  },
+  {
+   "id": 9,
+   "type": "VaeDecodeStructureTrellis2",
+   "pos": [
+    1900,
+    120
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 11
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 12
+    }
+   ],
+   "outputs": [
+    {
+     "name": "voxel",
+     "type": "VOXEL",
+     "links": [
+      15
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VaeDecodeStructureTrellis2"
+   },
+   "widgets_values": [
+    "32"
+   ]
+  },
+  {
+   "id": 11,
+   "type": "Trellis2ShapeStage",
+   "pos": [
+    2280,
+    120
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 13
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 14
+    },
+    {
+     "name": "voxel",
+     "type": "VOXEL",
+     "link": 15
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      16
+     ]
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": [
+      17
+     ]
+    },
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      18
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "Trellis2ShapeStage"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 12,
+   "type": "KSampler",
+   "pos": [
+    2660,
+    120
+   ],
+   "size": [
+    270,
+    270
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 19
+    },
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "link": 16
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "link": 17
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 18
+    }
+   ],
+   "outputs": [
+    {
+     "name": "LATENT",
+     "type": "LATENT",
+     "links": [
+      20
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSampler"
+   },
+   "title": "KSampler shape (20)",
+   "widgets_values": [
+    42,
+    "fixed",
+    20,
+    7.5,
+    "euler",
+    "normal",
+    1.0
+   ]
+  },
+  {
+   "id": 15,
+   "type": "VaeDecodeShapeTrellis",
+   "pos": [
+    3040,
+    120
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 20
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 21
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      22
+     ]
+    },
+    {
+     "name": "shape_subdivides",
+     "type": "SHAPE_SUBDIVIDES",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VaeDecodeShapeTrellis"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 25,
+   "type": "UnwrapMesh",
+   "pos": [
+    3420,
+    120
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 22
+    }
+   ],
+   "outputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "links": [
+      23
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "UnwrapMesh"
+   },
+   "widgets_values": [
+    "pec",
+    1024,
+    1,
+    0.0002
+   ]
+  },
+  {
+   "id": 22,
+   "type": "MeshToFile3D",
+   "pos": [
+    3800,
+    120
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 23
+    }
+   ],
+   "outputs": [
+    {
+     "name": "model_3d",
+     "type": "FILE_3D_GLB",
+     "links": [
+      24
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MeshToFile3D"
+   },
+   "widgets_values": []
+  },
+  {
+   "id": 27,
+   "type": "SaveGLB",
+   "pos": [
+    4180,
+    120
+   ],
+   "size": [
+    260,
+    90
+   ],
+   "flags": {},
+   "inputs": [
+    {
+     "name": "mesh",
+     "type": "MESH",
+     "link": 24
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "SaveGLB"
+   },
+   "widgets_values": [
+    "3d/VWML_shape_only"
+   ]
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   3,
+   1,
+   "IMAGE"
+  ],
+  [
+   2,
+   2,
+   0,
+   3,
+   0,
+   "BACKGROUND_REMOVAL"
+  ],
+  [
+   3,
+   3,
+   0,
+   28,
+   1,
+   "MASK"
+  ],
+  [
+   4,
+   1,
+   0,
+   28,
+   0,
+   "IMAGE"
+  ],
+  [
+   5,
+   4,
+   0,
+   5,
+   0,
+   "CLIP_VISION"
+  ],
+  [
+   6,
+   28,
+   0,
+   5,
+   1,
+   "IMAGE"
+  ],
+  [
+   7,
+   5,
+   0,
+   8,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   8,
+   5,
+   1,
+   8,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   9,
+   6,
+   0,
+   8,
+   0,
+   "MODEL"
+  ],
+  [
+   10,
+   7,
+   0,
+   8,
+   3,
+   "LATENT"
+  ],
+  [
+   11,
+   8,
+   0,
+   9,
+   0,
+   "LATENT"
+  ],
+  [
+   12,
+   10,
+   0,
+   9,
+   1,
+   "VAE"
+  ],
+  [
+   13,
+   5,
+   0,
+   11,
+   0,
+   "CONDITIONING"
+  ],
+  [
+   14,
+   5,
+   1,
+   11,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   15,
+   9,
+   0,
+   11,
+   2,
+   "VOXEL"
+  ],
+  [
+   16,
+   11,
+   0,
+   12,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   17,
+   11,
+   1,
+   12,
+   2,
+   "CONDITIONING"
+  ],
+  [
+   18,
+   11,
+   2,
+   12,
+   3,
+   "LATENT"
+  ],
+  [
+   19,
+   6,
+   0,
+   12,
+   0,
+   "MODEL"
+  ],
+  [
+   20,
+   12,
+   0,
+   15,
+   0,
+   "LATENT"
+  ],
+  [
+   21,
+   10,
+   0,
+   15,
+   1,
+   "VAE"
+  ],
+  [
+   22,
+   15,
+   0,
+   25,
+   0,
+   "MESH"
+  ],
+  [
+   23,
+   25,
+   0,
+   22,
+   0,
+   "MESH"
+  ],
+  [
+   24,
+   22,
+   0,
+   27,
+   0,
+   "FILE_3D_GLB"
+  ]
+ ],
+ "groups": [],
+ "config": {},
+ "extra": {
+  "note": "VWML 12GB GUI shape-only: Trellis2 branch hard-wired, no upsample stage, no texture bake."
+ },
+ "version": 0.4
+}
