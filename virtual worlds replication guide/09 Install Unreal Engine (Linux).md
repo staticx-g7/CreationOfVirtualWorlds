@@ -5,6 +5,7 @@ tags: [replication, unreal, linux]
 
 Verified with **UE 5.7.4 promoted build, full `Engine/Source` included**, at
 `~/Desktop/UnrealEngine/UE_5.7.4` on the course machine. 1–2 h (mostly download).
+> [!tip] On Windows? → [[09 Install Unreal Engine (Windows)]]
 
 ## Route A — Epic Games Launcher (recommended)
 1. **Linux:** Epic's native Linux beta launcher (or install the Windows launcher

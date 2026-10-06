@@ -3,6 +3,7 @@
 		{"id":"n00","x":0,"y":0,"width":260,"height":120,"type":"file","file":"00 Start Here.md"},
 		{"id":"n01","x":320,"y":0,"width":260,"height":120,"type":"file","file":"01 Hardware and OS Requirements.md"},
 		{"id":"n02","x":640,"y":0,"width":260,"height":120,"type":"file","file":"02 Linux System Setup.md"},
+		{"id":"n02w","x":640,"y":180,"width":260,"height":120,"type":"file","file":"02 Windows System Setup.md"},
 		{"id":"n03","x":960,"y":0,"width":260,"height":120,"type":"file","file":"03 Install ComfyUI (Linux).md"},
 		{"id":"n04","x":960,"y":180,"width":260,"height":120,"type":"file","file":"04 Install ComfyUI (Windows).md"},
 		{"id":"n05","x":1280,"y":0,"width":260,"height":120,"type":"file","file":"05 TRELLIS.2 Model Weights.md"},
@@ -14,10 +15,13 @@
 		{"id":"n14","x":640,"y":-320,"width":260,"height":120,"type":"file","file":"14 Troubleshooting Field Guide.md"},
 		{"id":"n08","x":960,"y":-320,"width":260,"height":120,"type":"file","file":"08 VRAM Playbook (12 GB and under).md"},
 		{"id":"gUnreal","x":1520,"y":250,"width":1400,"height":460,"type":"group","label":"🏗 Unreal Engine track"},
+
 		{"id":"n09","x":1600,"y":320,"width":260,"height":120,"type":"file","file":"09 Install Unreal Engine (Linux).md"},
+		{"id":"n09w","x":1600,"y":520,"width":260,"height":120,"type":"file","file":"09 Install Unreal Engine (Windows).md"},
 		{"id":"n10","x":1920,"y":320,"width":260,"height":120,"type":"file","file":"10 Create the Demo Project.md"},
 		{"id":"n11","x":2240,"y":320,"width":260,"height":120,"type":"file","file":"11 Unreal MCP Setup.md"},
 		{"id":"n13","x":2560,"y":320,"width":260,"height":120,"type":"file","file":"13 Dataset Pipeline Tools.md"},
+		{"id":"n17","x":2560,"y":520,"width":260,"height":120,"type":"file","color":"5","file":"17 Modular PCG via MCP.md"},
 		{"id":"n12","x":2240,"y":520,"width":260,"height":120,"type":"file","color":"6","file":"12 City Sample on Linux — Reality Check.md"},
 		{"id":"gDocs","x":2500,"y":-400,"width":720,"height":260,"type":"group","label":"📖 Node-by-node docs"},
 		{"id":"nNM","x":2560,"y":-320,"width":260,"height":120,"type":"file","file":"template nodes/trellis/00 Node Map.md"},
@@ -45,6 +49,10 @@
 		{"id":"e18","fromNode":"n08","fromSide":"right","toNode":"n06","toSide":"top","label":"on every OOM"},
 		{"id":"e19","fromNode":"n07","fromSide":"top","toNode":"nNM","toSide":"left","label":"every widget explained"},
 		{"id":"e20","fromNode":"nNM","fromSide":"right","toNode":"nTM","toSide":"left","label":"upstream half"},
-		{"id":"e21","fromNode":"n16","fromSide":"right","toNode":"nTM","toSide":"bottom"}
+		{"id":"e21","fromNode":"n16","fromSide":"right","toNode":"nTM","toSide":"bottom"},
+		{"id":"e22","fromNode":"n01","fromSide":"bottom","toNode":"n02w","toSide":"left","label":"Windows path"},
+		{"id":"e23","fromNode":"n02w","fromSide":"right","toNode":"n04","toSide":"left"},
+		{"id":"e24","fromNode":"n09w","fromSide":"right","toNode":"n10","toSide":"bottom","label":"Windows path"},
+		{"id":"e25","fromNode":"n11","fromSide":"bottom","toNode":"n17","toSide":"left","label":"applied: PCG world"}
 	]
 }

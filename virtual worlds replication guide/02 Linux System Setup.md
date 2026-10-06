@@ -4,6 +4,7 @@ tags: [replication, linux, setup]
 # Linux System Setup
 
 One-time OS prep. Ubuntu 22.04/24.04 assumed; adapt package names elsewhere.
+> [!tip] On Windows? → [[02 Windows System Setup]]
 
 ## 1. Nvidia driver (must work before anything else)
 ```bash
@@ -22,10 +23,13 @@ sudo reboot                        # then re-run nvidia-smi
 ```bash
 sudo apt update
 sudo apt install -y git curl wget unzip build-essential clang lld make cmake \
-                    python3-venv ffmpeg
+                    python3-venv ffmpeg git-lfs
+git lfs install        # one-time — needed to download the demo project assets
 ```
 - `clang`/`lld`/`make`/`cmake`: Unreal needs them (plugin compiles — [[11 Unreal MCP Setup]])
 - `ffmpeg`: video/frame tooling — [[13 Dataset Pipeline Tools]]
+- `git-lfs`: the demo project's `Content/` assets are stored in Git LFS —
+  without it a clone yields useless pointer files ([[10 Create the Demo Project#0. Shortcut — clone the finished project (skip sections 1–3)]])
 
 ## 3. Fast Python env manager (`uv`)
 ```bash

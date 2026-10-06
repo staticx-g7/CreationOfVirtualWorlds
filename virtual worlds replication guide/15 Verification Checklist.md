@@ -25,6 +25,7 @@ replicated the course machine. Last full pass: 2026-10-03.
 
 ## Unreal
 - [ ] Editor launches from an **absolute** path (pattern in [[09 Install Unreal Engine (Linux)]])
+- [ ] If you cloned instead of building ([[10 Create the Demo Project#0. Shortcut — clone the finished project (skip sections 1–3)]]): `git lfs ls-files | wc -l` in the repo → ≈ 700+ and `ls -la VirtualWorldsDemo/Content/**/*.uasset | head` → real MB-size files, not pointer stubs
 - [ ] `VWClassDemo` opens with 0 plugin errors in the Output Log
 - [ ] Outliner in `DemoWorld` shows `Sun · SkyLight · ExponentialHeightFog · Ground · PropSlot_00–07`
 - [ ] One AI-generated GLB imported and placed in a slot
