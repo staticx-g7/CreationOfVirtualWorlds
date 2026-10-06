@@ -164,6 +164,9 @@ grow with the rock. Output feeds the **existing** Short Wild Grass spawner
 - `/Game/PCG/Subgraphs/` — the 12 modules above, each with a description
 - `/Game/PCG/Materials/M_WaterRibbon`
 - `Content/PCG/PCG_ScatterMesh.bak` — pre-refactor backup (delete when happy)
+- `/Game/PCG/PCG_Learn_StepByStep` — tutorial strip-copy of the scatter graph
+  (10 teaching steps on one volume) — fully documented node-by-node in
+  [[00 PCG Learn Node Map]]
 
 Next: fold modules into new biomes → back to [[10 Create the Demo Project]],
 or overall proof: [[15 Verification Checklist]]
